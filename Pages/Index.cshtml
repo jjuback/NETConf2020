@@ -1,0 +1,27 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div>
+    <table id="myTable" class="table table-sm table-striped">
+        <thead class="thead-dark">
+            <tr class="d-flex">
+                <th scope="col" class="col-sm-2">Id</th>
+                <th scope="col" class="col-sm-6">Process Name</th>
+                <th scope="col" class="col-sm-4 text-right">Physical Memory</th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model.Processes)
+        {
+            <tr class="d-flex">
+                <td class="col-sm-2" scope="row"><a asp-page="./View" asp-route-id="@item.Id">@item.Id</a></td>
+                <td class="col-sm-6">@try{@item.MainModule.ModuleName}catch{@item.ProcessName}</td>
+                <td class="col-sm-4 text-right">@item.WorkingSet64</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>

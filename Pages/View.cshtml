@@ -1,0 +1,25 @@
+﻿@page
+@model ViewModel
+@{
+    ViewData["Title"] = "Process view";
+}
+<div>
+    <dl class="row">
+        @foreach (var property in @Model.PropertyList.Select(name => typeof(System.Diagnostics.Process).GetProperty(name)))
+        {
+        <dt class="col-sm-4">
+            @property.Name
+        </dt>
+        <dd class="col-sm-8">
+            @property.GetValue(Model.Process)
+        </dd>
+        }
+    </dl>
+</div>
+<div>
+    <hr />
+    <form method="post">
+        <input type="submit" value="Kill Process" class="btn btn-danger" />
+        <a class="btn btn-light" asp-page="./Index">Back to List</a>
+    </form>
+</div>
